@@ -55,6 +55,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         tooltip: 'Get next joke',
         child: Icon(
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         onPressed: updateJoke,
       ),
-      bottomSheet: Stack(
+      bottomNavigationBar: Stack(
         children: [
           Container(
             color: Colors.black,
@@ -85,11 +86,22 @@ class DummyBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          end: Alignment.topLeft,
+          begin: Alignment.centerRight,
+          stops: [0.1, 0.9],
+          colors: [
+            Colors.black54,
+            Colors.transparent,
+          ],
+        ),
+      ),
       alignment: Alignment.bottomRight,
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: bottomShitHeight + 30,
+          bottom: bottomShitHeight,
           right: 16,
         ),
         child: Text('Let\' joke', style: AppTextStyles.s18),
