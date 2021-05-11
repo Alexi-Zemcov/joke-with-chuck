@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:jokes_about_chuck/constants.dart';
 import 'package:jokes_about_chuck/joke_model.dart';
+
+// TODO: сгенерировать ключ
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -27,8 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  double bottomSheetHeight(BuildContext context) =>
-      50 + MediaQuery.of(context).padding.bottom;
+  double bottomSheetHeight(BuildContext context) => 50;
 
   @override
   Widget build(BuildContext context) {
@@ -50,18 +52,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         JokeText(joke: jokeData!.value),
                     ],
                   ),
-                  if (isLoading) LinearProgressIndicator(),
                 ],
               ),
       ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Get next joke',
-        child: Icon(Icons.text_fields),
+        child: Icon(
+          jokeData == null ? Icons.play_arrow : Icons.skip_next,
+          color: Colors.grey,
+        ),
         onPressed: updateJoke,
       ),
-      bottomSheet: Container(
-        color: Colors.black,
-        height: bottomSheetHeight(context),
+      bottomSheet: Stack(
+        children: [
+          Container(
+            color: Colors.black,
+            height: bottomSheetHeight(context),
+          ),
+          if (isLoading) LinearProgressIndicator()
+        ],
       ),
     );
   }
@@ -80,7 +89,7 @@ class DummyBody extends StatelessWidget {
       alignment: Alignment.bottomRight,
       child: Padding(
         padding: EdgeInsets.only(
-          bottom: bottomShitHeight,
+          bottom: bottomShitHeight + 30,
           right: 16,
         ),
         child: Text('Let\' joke', style: AppTextStyles.s18),
@@ -101,7 +110,7 @@ class JokeText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 30, left: 16, right: 16),
-      child: Text(
+      child: SelectableText(
         joke!,
         style: AppTextStyles.s24,
       ),
@@ -110,12 +119,3 @@ class JokeText extends StatelessWidget {
 }
 
 Dio dio = Dio();
-
-class AppTextStyles {
-  static const TextStyle s24 = TextStyle(
-    fontSize: 24,
-  );
-  static const TextStyle s18 = TextStyle(
-    fontSize: 18,
-  );
-}
