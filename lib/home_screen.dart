@@ -83,7 +83,7 @@ class DummyBody extends StatelessWidget {
           bottom: bottomShitHeight,
           right: 16,
         ),
-        child: Text('Let\' joke', style: AppTextStyles.s24),
+        child: Text('Let\' joke', style: AppTextStyles.s18),
       ),
     );
   }
@@ -114,5 +114,8 @@ Dio dio = Dio();
 class AppTextStyles {
   static const TextStyle s24 = TextStyle(
     fontSize: 24,
+  );
+  static const TextStyle s18 = TextStyle(
+    fontSize: 18,
   );
 }
