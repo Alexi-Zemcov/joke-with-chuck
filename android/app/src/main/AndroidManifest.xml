@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jf1303.flutter_app">
+    package="com.jf1303.jokes_with_chuck">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="flutter_app"
+        android:label="jokes_with_chuck"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
